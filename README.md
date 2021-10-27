@@ -1,3 +1,3 @@
 # devops-netology
-1_первый коммит
- 
+1_'First commit'
+2_'Added gitignore'
