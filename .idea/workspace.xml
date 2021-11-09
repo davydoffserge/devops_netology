@@ -63,11 +63,23 @@
         <entry key="MAIN">
           <value>
             <State>
+<<<<<<< HEAD
               <option name="COLUMN_ID_WIDTH">
                 <map>
                   <entry key="Table.Default.Author.ColumnIdWidth" value="78" />
                   <entry key="Table.Default.Date.ColumnIdWidth" value="78" />
                   <entry key="Table.Space.CommitStatus.ColumnIdWidth" value="32" />
+=======
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="git-merge" />
+                      </list>
+                    </value>
+                  </entry>
+>>>>>>> git-merge
                 </map>
               </option>
             </State>
