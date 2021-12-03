@@ -41,8 +41,8 @@
 #запустим команду dmesg |grep -i hypervisor
 #vagrant@vagrant:~$ dmesg |grep -i hypervisor
 #[    0.000000] Hypervisor detected: KVM
-#[    0.323848] SRBDS: Unknown: Dependent on hypervisor status
-# на домашней виртуальной Ubuntu на Oracle VM VirtualBox, также был обнаружен гипервизор с определенными параметрами.
+#[    0.323848] SRBDS: Unknown: Dependent on hypervisor status.
+#на домашней виртуальной Ubuntu на Oracle VM VirtualBox,также был обнаружен гипервизор с определенными параметрами.
 #к сожалению, проверить на "голом" железе не получилось.
 
 #5)Как настроен sysctl fs.nr_open на системе по-умолчанию? Узнайте, что означает этот параметр. 
@@ -76,13 +76,13 @@
 #С переносами строк:
 #:()
 #{
-#    :|:&
+#:|:&
 #};
 #:
 #Переименование : функции forkbomb:
 #forkbomb()
 #{
-#    forkbomb | forkbomb &
+#forkbomb | forkbomb &
 #};
 #forkbomb
 #можете предотвратить подобные атаки, используя ограничение, чтобы ограничить количество процессов на пользователя:
