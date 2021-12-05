@@ -178,6 +178,12 @@
 #  └─md0                9:0    0  1000M  0 raid0
 
 #8)Создайте 2 независимых PV на получившихся md-устройствах.
+#выполнено
+#root@vagrant:~# pvcreate /dev/md1 /dev/md0
+#  Physical volume "/dev/md1" successfully created.
+#  Physical volume "/dev/md0" successfully created.
+
+#9)Создайте общую volume-group на этих двух PV.
 
 #root@vagrant:~# vgdisplay
 #  --- Volume group ---
