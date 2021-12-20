@@ -1,206 +1,300 @@
 
 #devops-netology
 
-#1)Проверьте список доступных сетевых интерфейсов на вашем компьютере. Какие команды есть для этого в Linux и в Windows?
-#ip -c -br link
+#1)Подключитесь к публичному маршрутизатору в интернет. Найдите маршрут к вашему публичному IP
+
+#telnet route-views.routeviews.org
+#Username: rviews
+#show ip route x.x.x.x/32
+#show bgp x.x.x.x/32
+
+#route-views>show ip route 176.194.104.55
+#Routing entry for 176.194.0.0/15, supernet
+#Known via "bgp 6447", distance 20, metric 0
+#Tag 6939, type external
+#Last update from 64.71.137.241 4w3d ago
+#Routing Descriptor Blocks:
+#* 64.71.137.241, from 64.71.137.241, 4w3d ago
+#Route metric is 0, traffic share count is 1
+#AS Hops 2
+#Route tag 6939
+#MPLS label: none
+
+
+#route-views>show bgp 176.194.104.55
+#BGP routing table entry for 176.194.0.0/15, version 1363906969
+#Paths: (23 available, best #19, table default)
+#Not advertised to any peer
+#Refresh Epoch 1
+#20912 3257 174 12714
+#212.66.96.126 from 212.66.96.126 (212.66.96.126)
+#Origin IGP, localpref 100, valid, external
+#Community: 3257:8070 3257:30155 3257:50001 3257:53900 3257:53902 20912:65004
+#path 7FE11D9F71F8 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#3333 12714
+#193.0.0.56 from 193.0.0.56 (193.0.0.56)
+#Origin IGP, localpref 100, valid, external
+#Community: 12714:62000
+#path 7FE1660E7058 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#8283 12714
+#94.142.247.3 from 94.142.247.3 (94.142.247.3)
+#Origin IGP, metric 0, localpref 100, valid, external
+#Community: 8283:1 8283:101 12714:62000
+#unknown transitive attribute: flag 0xE0 type 0x20 length 0x18
+#value 0000 205B 0000 0000 0000 0001 0000 205B
+#0000 0005 0000 0001
+#path 7FE0E544C350 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#57866 1299 12714
+#37.139.139.17 from 37.139.139.17 (37.139.139.17)
+#Origin IGP, metric 0, localpref 100, valid, external
+#Community: 1299:30000 57866:100 57866:101 57866:501
+#path 7FE07C705F40 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#20130 6939 12714
+#140.192.8.16 from 140.192.8.16 (140.192.8.16)
+#Origin IGP, localpref 100, valid, external
+#path 7FE1888BEF48 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#53767 174 12714
+#162.251.163.2 from 162.251.163.2 (162.251.162.3)
+#Origin IGP, localpref 100, valid, external
+#Community: 174:21101 174:22005 53767:5000
+#path 7FE14D333FB8 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#852 1299 12714
+#154.11.12.212 from 154.11.12.212 (96.1.209.43)
+#Origin IGP, metric 0, localpref 100, valid, external
+#path 7FE1114F49F8 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#3549 3356 174 12714
+#208.51.134.254 from 208.51.134.254 (67.16.168.191)
+#Origin IGP, metric 0, localpref 100, valid, external
+#Community: 3356:3 3356:22 3356:86 3356:575 3356:666 3356:903 3356:2011 3549:2581 3549:30840
+#path 7FE0A8D5E050 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#3356 1299 12714
+#4.68.4.46 from 4.68.4.46 (4.69.184.201)
+#Origin IGP, metric 0, localpref 100, valid, external
+#Community: 3356:3 3356:22 3356:86 3356:575 3356:666 3356:903 3356:2012
+#path 7FE166F76CA8 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#101 174 12714
+#209.124.176.223 from 209.124.176.223 (209.124.176.223)
+#Origin IGP, localpref 100, valid, external
+#Community: 101:20100 101:20110 101:22100 174:21101 174:22005
+#Extended Community: RT:101:22100
+#path 7FE0437D5568 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#2497 174 12714
+#202.232.0.2 from 202.232.0.2 (58.138.96.254)
+#Origin IGP, localpref 100, valid, external
+#path 7FE1346261E0 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#4901 6079 1299 12714
+#162.250.137.254 from 162.250.137.254 (162.250.137.254)
+#Origin IGP, localpref 100, valid, external
+#Community: 65000:10100 65000:10300 65000:10400
+#path 7FE15DE18EA8 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 3
+#3303 12714
+#217.192.89.50 from 217.192.89.50 (138.187.128.158)
+#Origin IGP, localpref 100, valid, external
+#Community: 3303:1004 3303:1006 3303:1030 3303:1031 3303:3056 12714:62000 65101:1085 65102:1000 65103:276 65104:150      path 7FE0291ABE50 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#7660 2516 1299 12714
+#203.181.248.168 from 203.181.248.168 (203.181.248.168)
+#Origin IGP, localpref 100, valid, external
+#Community: 2516:1030 7660:9003
+#path 7FE159445FB8 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#7018 1299 12714
+#12.0.1.63 from 12.0.1.63 (12.0.1.63)
+#Origin IGP, localpref 100, valid, external
+#Community: 7018:5000 7018:37232
+#path 7FE151EB08C0 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#49788 12552 12714
+#91.218.184.60 from 91.218.184.60 (91.218.184.60)
+#Origin IGP, localpref 100, valid, external
+#Community: 12552:12000 12552:12100 12552:12101 12552:22000
+#Extended Community: 0x43:100:1
+#path 7FE13A2BC228 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#1221 4637 1299 12714
+#203.62.252.83 from 203.62.252.83 (203.62.252.83)
+#Origin IGP, localpref 100, valid, external
+#path 7FE114F089A8 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#701 174 12714
+#137.39.3.55 from 137.39.3.55 (137.39.3.55)
+#Origin IGP, localpref 100, valid, external
+#path 7FE0AA27A628 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#6939 12714
+#64.71.137.241 from 64.71.137.241 (216.218.252.164)
+#Origin IGP, localpref 100, valid, external, best 
+#path 7FE040A652C0 RPKI State not found
+#rx pathid: 0, tx pathid: 0x0
+#Refresh Epoch 1
+#3257 1299 12714
+#89.149.178.10 from 89.149.178.10 (213.200.83.26)
+#Origin IGP, metric 10, localpref 100, valid, external
+#Community: 3257:8794 3257:30052 3257:50001 3257:54900 3257:54901
+#path 7FE0C65F2060 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#3561 209 3356 174 12714
+#206.24.210.80 from 206.24.210.80 (206.24.210.80)
+#Origin IGP, localpref 100, valid, external
+#path 7FE0B4D810F8 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#1351 6939 12714
+#132.198.255.253 from 132.198.255.253 (132.198.255.253)
+#Origin IGP, localpref 100, valid, external
+#path 7FE17FEC6EE8 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+#Refresh Epoch 1
+#19214 174 12714
+#208.74.64.40 from 208.74.64.40 (208.74.64.40)
+#Origin IGP, localpref 100, valid, external
+#Community: 174:21101 174:22005
+#path 7FE13AC47D70 RPKI State not found
+#rx pathid: 0, tx pathid: 0
+
+
+#2)Создайте dummy0 интерфейс в Ubuntu. Добавьте несколько статических маршрутов. Проверьте таблицу маршрутизации.
+
+#sudo modprobe -v dummy numdummies=2 
+#sudo lsmod | grep dummy
+#dummy                  16384  0  -  модуль dummy загружен
+#serge@ubu3:~$ sudo ip link add dummy0 type dummy
+#serge@ubu3:~$ ip -c -br link
 #lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
-#enp0s3           UP             08:00:27:19:5d:56 <BROADCAST,MULTICAST,UP,LOWER_UP>
-#lo, локальный интерфейс  (т.н. называемый Loopback), работает, имеет фиксированный для всех loopback-интерфейсов IP-адрес 127.0.0.1, 
-#маску подсети 255.0.0.0
-#enp0s3  физический интерфейс проводного сетевого подключения, работает, выведен MAC адрес.
+#enp0s3           UP             08:00:27:7d:c1:02 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+#dummy0           DOWN           5a:81:d7:75:ff:7d <BROADCAST,NOARP> 
+#serge@ubu3:~$ sudo ip addr add 10.0.3.3/24 dev dummy0
+#serge@ubu3:~$ ip -c -br link
+#lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+#enp0s3           UP             08:00:27:7d:c1:02 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+#dummy0           DOWN           5a:81:d7:75:ff:7d <BROADCAST,NOARP> 
 
+#для netplan конфигурация
+#network:
+#version: 2
+#renderer: networkd
+#bridges:
+#dummy0:
+#dhcp4: no
+#dhcp6: no
+#accept-ra: no
+#interfaces: [ ]
+#addresses:
+#- 10.0.3.3/24
 
-#в windows используют команду ipcongig /all
+#в итоге имеем 
 
-#2)Какой протокол используется для распознавания соседа по сетевому интерфейсу? Какой пакет и команды есть в Linux для этого?
-#LLDP - протокол обмена между соседними устройствами.
-#включаем вторую виртуальную машину, устанавлиаем на двух машинах необходимые пакеты и добавлеим их а автозагрузку
-#sudo apt-get install lldpd
-#sudo systemctl enable lldpd && systemctl start lldpd
-#lldpctl
--------------------------------------------------------------------------------
-#LLDP neighbors:
--------------------------------------------------------------------------------
-#Interface:    enp0s8, via: LLDP, RID: 1, Time: 0 day, 00:02:33
-#Chassis:     
-#ChassisID:    mac 08:00:27:c7:ac:7c
-#SysName:      ubu2
-#SysDescr:     Ubuntu 20.04.3 LTS Linux 5.11.0-41-generic #45~20.04.1-Ubuntu SMP Wed Nov 10 10:20:10 UTC 2021 x86_64
-#MgmtIP:       10.0.2.15
-#MgmtIP:       fe80::ce97:72fc:4f49:7048
-#Capability:   Bridge, off
-#Capability:   Router, off
-#Capability:   Wlan, off
-#Capability:   Station, on
-#Port:        
-#PortID:       mac 08:00:27:f8:aa:08
-#PortDescr:    enp0s8
-#TTL:          120
-#PMD autoneg:  supported: yes, enabled: yes
-#Adv:          10Base-T, HD: yes, FD: yes
-#Adv:          100Base-TX, HD: yes, FD: yes
-#Adv:          1000Base-T, HD: no, FD: yes
-#MAU oper type: 1000BaseTFD - Four-pair Category 5 UTP, full duplex mode
--------------------------------------------------------------------------------
+#serge@ubu3:/etc/network$ ip -c -br link
+#lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+#enp0s3           UP             08:00:27:7d:c1:02 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+#dummy0           UNKNOWN        5a:81:d7:75:ff:7d <BROADCAST,NOARP,UP,LOWER_UP>
 
-#3)Какая технология используется для разделения L2 коммутатора на несколько виртуальных сетей? 
-#Какой пакет и команды есть в Linux для этого? Приведите пример конфига.
+#NO-CARRIER означает, что сетевой разъем не обнаруживает сигнал на линии. 
+#Обычно это происходит потому, что сетевой кабель отключён или повреждён. 
+#В редких случаях это также может быть аппаратный сбой или ошибка драйвера. 
+#В нашем случае именно входящий сигнал.  UP означает, что устройство работает. 
+#BROADCAST — устройство может отправлять трафик всем хостам по link. 
+#MULTICAST — устройство может выполнять и принимать многоадресные пакеты.
 
-#sudo apt-get install vlan
-#vconfig add enp0s8 500
-#были ошибки на переход на новую команду ip. 
-#sudo modprobe 8021q
-#ifconfig -a посмотрим список всех интерфейсов, добавим IP адрес для интерфейса и запустим его
-#sudo ifconfig enp0s8 500 add 192.168.0.1 netmask 255.255.255.0 up
+#Таблица маршрутизации 
+#ip r
+#default via 10.0.2.2 dev enp0s3 proto dhcp metric 100 
+#10.0.2.0/24 dev enp0s3 proto kernel scope link src 10.0.2.15 metric 100 
+#10.0.3.0/24 dev dummy0 proto kernel scope link src 10.0.3.3 metric 425 linkdown 
+#169.254.0.0/16 dev dummy0 scope link metric 1000 linkdown 
 
-#ifconfig -a
-#enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-#inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
-#inet6 fe80::bdd2:a202:ae4a:6761  prefixlen 64  scopeid 0x20<link>
-#ether 08:00:27:19:5d:56  txqueuelen 1000  (Ethernet)
-#RX packets 1  bytes 590 (590.0 B)
-#RX errors 0  dropped 0  overruns 0  frame 0
-#TX packets 49  bytes 7648 (7.6 KB)
-#TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+#ip r | grep stat
 
-#enp0s8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-#ether 08:00:27:dc:f2:1a  txqueuelen 1000  (Ethernet)
-#RX packets 0  bytes 0 (0.0 B)
-#RX errors 0  dropped 0  overruns 0  frame 0
-#TX packets 465  bytes 92451 (92.4 KB)
-#TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+#статических марштутов нет.
 
-#enp0s8.500: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-#inet6 fe80::a00:27ff:fedc:f21a  prefixlen 64  scopeid 0x20<link>
-#ether 08:00:27:dc:f2:1a  txqueuelen 1000  (Ethernet)
-#RX packets 0  bytes 0 (0.0 B)
-#RX errors 0  dropped 0  overruns 0  frame 0
-#TX packets 63  bytes 7234 (7.2 KB)
-#TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+#через netplan
 
-#enp0s8.500:0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-#inet 192.168.0.1  netmask 0.0.0.0  broadcast 0.0.0.0
-#ether 08:00:27:dc:f2:1a  txqueuelen 1000  (Ethernet)
-
-#lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
-#inet 127.0.0.1  netmask 255.0.0.0
-#inet6 ::1  prefixlen 128  scopeid 0x10<host>
-#loop  txqueuelen 1000  (Локальная петля (Loopback))
-#RX packets 40252  bytes 2859012 (2.8 MB)
-#RX errors 0  dropped 0  overruns 0  frame 0
-#TX packets 40252  bytes 2859012 (2.8 MB)
-#TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-#Для того, чтобы интерфейс поднимался каждый раз после перезагрузки системы, его нужно прописать через netplan
-#создаем конфигурационный файл e8.yaml в директории /etc/netplan
 #network:
 #version: 2
 #renderer: NetworkManager
 #ethernets:
 #enp0s8:
-#dhcp4: true
-#dhcp6: true
-#vlans:
-#vlan500:
-#id: 500
-#link: enp0s8
 #dhcp4: no
-#addresses: [192.168.0.1/24]
-#gateway4: 192.168.0.1
+#addresses:
+#- 10.0.3.30/24
+#nameservers:
+#addresses:
+#- 8.8.8.8
+#- 8.8.4.4
+#routes:
+#- to: 10.0.3.0/24
+#via: 10.0.3.0/24
+#on-link: true
 
-#т.к. не знаком с yaml было куча ошибок в редакции конфикурационного файла
-#netplan apply - применяем конфигурацию
+#serge@ubu3:/etc/netplan$ ip r
+#default via 10.0.2.2 dev enp0s3 proto dhcp metric 100 
+#default via 10.0.2.15 dev enp0s8 proto static metric 20101 
+#10.0.2.0/24 dev enp0s3 proto kernel scope link src 10.0.2.15 metric 100 
+#10.0.2.15 dev enp0s8 proto static scope link metric 20101 
+#10.0.3.0/24 dev enp0s8 proto kernel scope link src 10.0.3.30 metric 101 
+#10.0.3.0/24 dev dummy0 proto kernel scope link src 10.0.3.3 metric 425 linkdown 
+#169.254.0.0/16 dev enp0s3 scope link metric 1000 
 
-#после перезагрузки
-#ip -c -br link
-#lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
-#enp0s3           UP             08:00:27:19:5d:56 <BROADCAST,MULTICAST,UP,LOWER_UP> 
-#enp0s8           UP             08:00:27:dc:f2:1a <BROADCAST,MULTICAST,UP,LOWER_UP> 
-#enp0s8.500@enp0s8 UP             08:00:27:dc:f2:1a <BROADCAST,MULTICAST,UP,LOWER_UP>
-
-
-#4)Какие типы агрегации интерфейсов есть в Linux? Какие опции есть для балансировки нагрузки? Приведите пример конфига.
-#LAG - в Linux бондинг не что иное, как слияние нескольких сетевых соединений в одно параллельное. 
-#Это позволяет увеличить пропускную способность канала и повысить отказоустойчивость сети в случае отказа одной из сетевых карт. 
-#Ifenslave используется для присоединения сетевых карт к bond-интерфейсу.
-#Bond0 будет считаться в системе как обычный сетевой интерфейс, но будет посылать пакеты через присоединенные (slave) устройства. 
-#Это позволит обеспечить простую и сбалансированную систему. Проверить на все 100% не получиться, т.к. необходима настройка интерфейсов
-#с двух сторон канала (не только сервера).
-
-#apt-get install ifenslave 
-#остановим сетевую службу  /etc/init.d/networking stop
-#сделаем копию  /etc/network/interfaces, 
-#cp /etc/network/interfaces /etc/network/interfaces.bak
-#редактируем, добавляем необходимые опции
-#nano /etc/network/interfaces
-
-#auto lo
-#iface lo inet loopback
-#
-# The primary network interface
-#auto bond0
-#iface bond0 inet static
-#address 192.168.1.10
-#netmask 255.255.255.0
-#network 192.168.1.0
-#gateway 192.168.1.254
-#slaves enp0s3 enp0s8
-# jumbo frame support
-#mtu 9000
-## Load balancing and fault tolerance
-#bond-mode balance-rr
-#bond-miimon 100
-#bond-downdelay 200
-#bond-updelay 200
-#dns-nameservers 8.8.8.8
-
-#address 192.168.1.10 : ip адрес для bond0.
-#netmask 255.255.255.0 : маска сети для bond0
-#network 192.168.1.0 : сетевой адрес для bond0
-#gateway 192.168.1.254  : шлюз по умолчанию для bond0.
-#bond-mode balance-rr  - режим циклического выбора активного интерфейса для исходящего трафика 
-#(рекомендован для включения по умолчанию, не требует применения специальных коммутаторов).
-#slaves enp0s3 enp0s8: настройка bond0 и привязка двух настоящих сетевых интерфейсов к нему.
-#bond-miimon 100 : Установка MII link частоты наблюдения в 100 миллисекунд. 
-#Это значение определяет как часто будет проверяться состояние соединения на каждом из интерфейсов.
-#bond-downdelay 200 : Устанавливает время в 200 миллисекунд ожидания, прежде чем отключить slave в случае отказа соединения. 
-#Эта опция действует только на bond-miimon.
-#bond-updelay 200 : Устанавливает время в 200 миллисекунд ожидания, прежде чем включить slave после восстановления соединения.
-#Эта опция действует только на bond-miimon.
-#dns-nameservers 8.8.8.8 Устанавливает 8.8.8.8 как dns сервер.
-# jumbo frame support mtu 9000 включаем поддержку Jumbo-кадров, для увеличения производительности сети.
-
-#/etc/init.d/networking restart   перезапускаем сетевую службу, 
-#ifconfig -a видим состояние.
+#serge@ubu3:/etc/netplan$ ip r | grep stat
+#default via 10.0.2.15 dev enp0s8 proto static metric 20101 
+#10.0.2.15 dev enp0s8 proto static scope link metric 20101
 
 
-#5)Сколько IP адресов в сети с маской /29 ? Сколько /29 подсетей можно получить из сети с маской /24. 
-#Приведите несколько примеров /29 подсетей внутри сети 10.10.10.0/24.
+#3)Проверьте открытые TCP порты в Ubuntu, какие протоколы и приложения используют эти порты? Приведите несколько примеров.
 
-#будем ленивыми и устанивим ipcalc, либо воспользуемся интернетовским калькулятором.
-#sudo apt-get install ipcalc
-#проверим количество адресов в сети с маской /29 и с маской /24
+#root@ubu3:~# ss -lntp
+#State      Recv-Q     Send-Q          Local Address:Port           Peer Address:Port     Process                                        
+#LISTEN     0          4096            127.0.0.53%lo:53                  0.0.0.0:*         users:(("systemd-resolve",pid=494,fd=13))     
+#LISTEN     0          5                   127.0.0.1:631                 0.0.0.0:*         users:(("cupsd",pid=536,fd=7))                
+#LISTEN     0          5                       [::1]:631                    [::]:*         users:(("cupsd",pid=536,fd=6))     
 
-#в итоге имеем: количество адресов в сети с маской 24 равно 256, рабочих адресов для хостов 254
-#количество адресов в сети с маской 29 равно 8, рабочих адресов для хостов 6
-#и соответственно будем иметь 10.10.10.0/29 ,10.10.10.8/29 , 10.10.10.16/29 и т.д., всего 32 подсети.
+#53 tcp порт это DNS
+#631 tcp это типичный адрес принтера
+
+#4)Проверьте используемые UDP сокеты в Ubuntu, какие протоколы и приложения используют эти порты?
+
+#root@ubu3:~# ss -pua
+#State     Recv-Q    Send-Q            Local Address:Port           Peer Address:Port      Process                                       
+#UNCONN    0         0                 127.0.0.53%lo:domain              0.0.0.0:*          users:(("systemd-resolve",pid=494,fd=12))    
+#ESTAB     0         0              10.0.2.15%enp0s3:bootpc             10.0.2.2:bootps     users:(("NetworkManager",pid=3024,fd=29))    
+#UNCONN    0         0                       0.0.0.0:51360               0.0.0.0:*          users:(("avahi-daemon",pid=534,fd=14))       
+#UNCONN    0         0                       0.0.0.0:mdns                0.0.0.0:*          users:(("avahi-daemon",pid=534,fd=12))       
+#UNCONN    0         0                       0.0.0.0:631                 0.0.0.0:*          users:(("cups-browsed",pid=643,fd=7))        
+#UNCONN    0         0                          [::]:41030                  [::]:*          users:(("avahi-daemon",pid=534,fd=15))       
+#UNCONN    0         0                          [::]:mdns                   [::]:*          users:(("avahi-daemon",pid=534,fd=13))
+
+#udp 51360  - avahi-daemon система, позволяющая обнаруживать сервисы в локальной сети, сетевые принтеры...
+#udp 631 IPP Internet Printing Protocol - тот же самый принтер, что и tcp.
 
 
-#6)Задача: вас попросили организовать стык между 2-мя организациями. Диапазоны 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 уже заняты. 
-#Из какой подсети допустимо взять частные IP адреса? Маску выберите из расчета максимум 40-50 хостов внутри подсети. 
-
-#Соответственно, если все адреса заняты можно попросить у провайдера предоставить выдать публичный IPv4-адрес.
-#Технология CG-NAT (Carrier Grade Network Address Translation) дает провайдеру возможность заменить локальный IP-адрес пользователя
-#на публичный в TCP/IP-сетях,
-#либо мы сами можем использовать это для связи между организациями эти адреса.
-#как нам рассказывали на лекции и зарезервировать адреса из сети 100.64.0.0/26  
-#с максимальным числом адресов 64, маска равная /27 не обеспечит требованиям по числу адресов(32).
-
-
-#7)Как проверить ARP таблицу в Linux, Windows? Как очистить ARP кеш полностью? Как из ARP таблицы удалить только один нужный IP?
-
-#arp -a – отобразить все записи таблицы ARP.
-
-#arp -d * - полная очистка таблицы ARP. Аналогично - arp -d без параметров. Если имеется несколько сетевых интерфейсов,
-#то очистка может быть выполнена только для одного из них - arp -d * 192.168.0.56.
-#arp -d 192.168.1.1 - удалить из таблицы ARP запись для IP-адреса 192.168.1.1
