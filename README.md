@@ -1,129 +1,172 @@
 
+
 # devops-netology
-# Домашнее задание к занятию "4.1. Командная оболочка Bash: Практические навыки"
+# Домашнее задание к занятию "4.2. Использование Python для решения типовых DevOps задач"
 
 ## Обязательная задача 1
 
 Есть скрипт:
-```bash
-a=1
-b=2
-c=a+b
-d=$a+$b
-e=$(($a+$b))
+```python
+#!/usr/bin/env python3
+a = 1
+b = '2'
+c = a + b
 ```
 
-Какие значения переменным c,d,e будут присвоены? Почему?
+### Вопросы:
+| Вопрос  | Ответ |
+| ------------- | ------------- |
+| Какое значение будет присвоено переменной `c`?  |  будет ошибка, т.к. имеем целое число и строку  |
+| Как получить для переменной `c` значение 12?  | '1'  нужно исправить,т.е.  'a' + 'b'  или '1' + '2' |
+| Как получить для переменной `c` значение 3?  | a + b или 1 + 2  |
 
-| Переменная  | Значение | Обоснование |
-| ------------- | ------------- | ------------- |
-| `c`  | a+b  | переменные строки считает их буквами |
-| `d`  | 1+2  | переменные строки вывод склеенная строка, а не арифметическое действие  |
-| `e`  |     3  | за счет скобок получаем сложение целых чисел |
-
-[link_abcde.jpg](./abcde.jpg)
-
+_________
 
 ## Обязательная задача 2
-На нашем локальном сервере упал сервис и мы написали скрипт, который постоянно проверяет его доступность, записывая дату проверок до тех пор, пока сервис не станет доступным (после чего скрипт должен завершиться). В скрипте допущена ошибка, из-за которой выполнение не может завершиться, при этом место на Жёстком Диске постоянно уменьшается. Что необходимо сделать, чтобы его исправить:
-```bash
-while ((1==1)
-do
-	curl https://localhost:4757
-	if (($? != 0))
-	then
-		date >> curl.log
-	fi
-done
+Мы устроились на работу в компанию, где раньше уже был DevOps Engineer. Он написал скрипт, позволяющий узнать, 
+какие файлы модифицированы в репозитории, относительно локальных изменений. Этим скриптом недовольно начальство, 
+потому что в его выводе есть не все изменённые файлы, а также непонятен полный путь к директории, где они находятся. 
+Как можно доработать скрипт ниже, чтобы он исполнял требования вашего руководителя?
+
+```python
+#!/usr/bin/env python3
+
+import os
+
+bash_command = ["cd ~/netology/sysadm-homeworks", "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+is_change = False
+for result in result_os.split('\n'):
+    if result.find('modified') != -1:
+        prepare_result = result.replace('\tmodified:   ', '')
+        print(prepare_result)
+        break
 ```
-
-
-```bash
-#!/usr/bin/env bash
-while ((1==1))
-do
-	curl https://localhost:4757
-	if (($? != 0))
-	then
-		date >> curl.log
-                   else exit
-	fi
-                   sleep 10
-done
-```
-нехватает скобок в строке *while*, чтобы компенсировать уменьшение места на диске введем интервал проверки </br>
-через *sleep*, и выход из цикла по выполнению условия доступности. 
-
-
-Необходимо написать скрипт, который проверяет доступность трёх IP: `192.168.0.1`, `173.194.222.113`, `87.250.250.242` по `80` порту и записывает результат в файл `log`. Проверять доступность необходимо пять раз для каждого узла.
 
 ### Ваш скрипт:
-```bash
-#!/usr/bin/env bash
-declare -i checking=1
-while (($checking<=5))
-do
-    for hosts in 192.168.0.1 173.194.222.113 87.250.250.242; do
-        nc -zw1 $hosts 80
-        echo "status" $? $hosts `date` >> script2.log
-    done
-checking+=1
-sleep 5
-done
+```python
+#!/usr/bin/env python3
+
+import os
+
+cmd=os.getcwd()
+bash_command = ["cd "+cmd, "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+is_change = False
+for result in result_os.split('\n'):
+    if result.find('modified') != -1:
+        prepare_result = result.replace('\tmodified:   ', ' ')
+        print(cmd+prepare_result)       
+        break
 ```
 
-содердержимое *script2.log*
-```log
-status 0 192.168.0.1 Вс 02 янв 2022 16:15:37 MSK
-status 0 173.194.222.113 Вс 02 янв 2022 16:15:37 MSK
-status 0 87.250.250.242 Вс 02 янв 2022 16:15:37 MSK
-status 0 192.168.0.1 Вс 02 янв 2022 16:15:42 MSK
-status 0 173.194.222.113 Вс 02 янв 2022 16:15:42 MSK
-status 0 87.250.250.242 Вс 02 янв 2022 16:15:42 MSK
-status 0 192.168.0.1 Вс 02 янв 2022 16:15:47 MSK
-status 0 173.194.222.113 Вс 02 янв 2022 16:15:47 MSK
-status 0 87.250.250.242 Вс 02 янв 2022 16:15:47 MSK
-status 0 192.168.0.1 Вс 02 янв 2022 16:15:52 MSK
-status 0 173.194.222.113 Вс 02 янв 2022 16:15:52 MSK
-status 0 87.250.250.242 Вс 02 янв 2022 16:15:52 MSK
-status 0 192.168.0.1 Вс 02 янв 2022 16:15:57 MSK
-status 0 173.194.222.113 Вс 02 янв 2022 16:15:57 MSK
-status 0 87.250.250.242 Вс 02 янв 2022 16:15:57 MSK
+### Вывод скрипта при запуске при тестировании:
 ```
+E:\DEV_OPS\devops-netology\devops-netology\devopsnetology README.md
+```
+
+
 
 ## Обязательная задача 3
-Необходимо дописать скрипт из предыдущего задания так, чтобы он выполнялся до тех пор,</br> 
-пока один из узлов не окажется недоступным. Если любой из узлов недоступен - IP этого узла пишется в файл error,</br>
-скрипт прерывается.
+Доработать скрипт выше так, чтобы он мог проверять не только локальный репозиторий в текущей директории, 
+а также умел воспринимать путь к репозиторию, который мы передаём как входной параметр. 
+Мы точно знаем, что начальство коварное и будет проверять работу этого скрипта в директориях, 
+которые не являются локальными репозиториями.
 
 ### Ваш скрипт:
-```bash
-#!/usr/bin/env bash
-declare -i checking=1
-while (($checking==1))
-do
-    for hosts in 192.168.0.1 173.194.222.113 87.250.250.242; do
-        nc -zw1 $hosts 80
-        if (($?==0))
-        then
-            echo "status" $? $hosts `date` >> script2.log
-        else
-           echo "status" $? $hosts `date` >> script_err.log
-           exit
-        fi
-    done
-sleep 5
-done
-```
-для проверки недоступности, последним взял адрес из виртуальной сети, в итоге имеем
+```python
+#!/usr/bin/env python3
 
-содержимое *script2.log*
-```log
-status 0 192.168.0.1 Вс 02 янв 2022 17:51:55 MSK
-status 0 173.194.222.113 Вс 02 янв 2022 17:51:55 MSK
+import os
+import pathlib
+import subprocess as sp
+
+path = cmd=os.getcwd()
+print (path)
+status = sp.run("git status")
+print (status)
+with sp.Popen(['git', 'status'], stdout=sp.PIPE) as sp:
+    result = sp.stdout.read().decode("utf-8")
+if result.find('not') == -1:
+    print('fatal: not a git repository (or any of the parent directories)')
+
+else:
+    cmd=os.getcwd()
+bash_command = ["cd "+cmd, "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+is_change = False
+for result in result_os.split('\n'):
+    if result.find('modified') != -1:
+        prepare_result = result.replace('\tmodified:   ', ' ')
+        print(cmd+prepare_result)       
+        break
 ```
-содержимое *script_err.log*
-```log
-status 1 10.0.3.31 Вс 02 янв 2022 17:51:56 MSK
+
+### Вывод скрипта при запуске при тестировании:
 ```
+E:\DEV_OPS\devops-netology\devops-netology\devopsnetology
+CompletedProcess(args='git status', returncode=0)
+E:\DEV_OPS\devops-netology\devops-netology\devopsnetology README.md
+```
+при естировании скрипта из папки с рабочего стола 
+```
+C:\Users\serge\Desktop\python
+CompletedProcess(args='git status', returncode=128)
+fatal: not a git repository (or any of the parent directories)
+```
+
+## Обязательная задача 4
+Наша команда разрабатывает несколько веб-сервисов, доступных по http. Мы точно знаем,
+что на их стенде нет никакой балансировки, кластеризации, за DNS прячется конкретный IP сервера, где установлен сервис. 
+Проблема в том, что отдел, занимающийся нашей инфраструктурой очень часто меняет нам сервера,
+поэтому IP меняются примерно раз в неделю, при этом сервисы сохраняют за собой DNS имена.
+Это бы совсем никого не беспокоило, если бы несколько раз сервера не уезжали в такой сегмент сети нашей компании,
+который недоступен для разработчиков. Мы хотим написать скрипт, который опрашивает веб-сервисы, получает их IP,
+выводит информацию в стандартный вывод в виде: <URL сервиса> - <его IP>. Также, должна быть реализована возможность
+проверки текущего IP сервиса c его IP из предыдущей проверки. Если проверка будет провалена - оповестить об этом 
+в стандартный вывод сообщением: [ERROR] <URL сервиса> IP mismatch: <старый IP> <Новый IP>. Будем считать,
+что наша разработка реализовала сервисы: `drive.google.com`, `mail.google.com`, `google.com`.
+
+### Ваш скрипт:
+```python
+#!/usr/bin/env python3
+
+import socket
+import time
+
+servers = {"drive.google.com": "", "mail.google.com": "", "google.com": ""}
+while True:
+    for url, ip_old in servers.items():
+        ip_new = socket.gethostbyname(url)
+        if ip_old == "":
+            servers[url] = ip_new
+            print("{} - {}".format(url, ip_new))
+        elif ip_old != ip_new:
+            print("[ERROR] {} IP mismatch: {} -> {}".format(url, ip_old, ip_new))
+            servers[url] = ip_new
+    time.sleep(10)
+```
+
+### Вывод скрипта при запуске при тестировании:
+```
+drive.google.com - 209.85.233.194
+mail.google.com - 209.85.233.18
+google.com - 64.233.161.139
+[ERROR] google.com IP mismatch: 64.233.161.139 -> 64.233.161.138
+[ERROR] mail.google.com IP mismatch: 209.85.233.18 -> 209.85.233.19
+[ERROR] google.com IP mismatch: 64.233.161.138 -> 64.233.161.113
+[ERROR] mail.google.com IP mismatch: 209.85.233.19 -> 209.85.233.18
+[ERROR] google.com IP mismatch: 64.233.161.113 -> 64.233.161.139
+[ERROR] mail.google.com IP mismatch: 209.85.233.18 -> 209.85.233.83
+[ERROR] google.com IP mismatch: 64.233.161.139 -> 64.233.161.102
+[ERROR] mail.google.com IP mismatch: 209.85.233.83 -> 209.85.233.19
+[ERROR] mail.google.com IP mismatch: 209.85.233.19 -> 209.85.233.17
+[ERROR] google.com IP mismatch: 64.233.161.102 -> 64.233.161.113
+[ERROR] mail.google.com IP mismatch: 209.85.233.17 -> 209.85.233.19
+[ERROR] google.com IP mismatch: 64.233.161.113 -> 64.233.161.139
+```
+
+[link_4_2_ipold_ipnew.jpg](./4_2_ipold_ipnew.jpg)
+
+пробовал на следующий день чистить DNS кэш, и делаем пинг из консоли, адрес drive.google.com остается прежним
 
