@@ -108,7 +108,7 @@ E:\DEV_OPS\devops-netology\devops-netology\devopsnetology
 CompletedProcess(args='git status', returncode=0)
 E:\DEV_OPS\devops-netology\devops-netology\devopsnetology README.md
 ```
-при естировании скрипта из папки с рабочего стола 
+при тестировании скрипта из папки с рабочего стола 
 ```
 C:\Users\serge\Desktop\python
 CompletedProcess(args='git status', returncode=128)
