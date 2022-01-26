@@ -343,3 +343,4 @@ serge@ubu3:~$ crontab -l
 # m h  dom mon dow   command
 0 0 1 * * /bin/sh /home/serge/serts.sh
 ```
+
