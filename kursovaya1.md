@@ -123,6 +123,7 @@ $ vault write auth/userpass/users/serge \
 ```
 потом можно поменять пароль через графический интерфейс)))
 в итоге имеем vault самоподписные сертификаты пользователь serge и работающую службу!
+
 [link_vault3.jpg](./vault3.jpg)
 
 [link_vault5.jpg](./vault5.jpg)
