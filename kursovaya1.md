@@ -314,9 +314,9 @@ server {
 
 [link_serge_it_working.jpg](./serge_it_working.jpg)
 
-[link_cert12.jpg](./cert12.jpg)
+[link_crt12.jpg](./crt12.jpg)
 
-[link_cert14.jpg](./cert14.jpg)
+[link_crt14.jpg](./crt14.jpg)
 
 ## 9.Создайте скрипт, который будет генерировать новый сертификат в vault:генерируем новый сертификат так, чтобы не переписывать конфиг nginx; перезапускаем nginx для применения нового сертификата.
 
