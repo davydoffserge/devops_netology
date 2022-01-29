@@ -20,13 +20,14 @@ c = a + b
 | Как получить для переменной `c` значение 12?  | '1'  нужно исправить,т.е.  'a' + 'b'  или '1' + '2' |
 | Как получить для переменной `c` значение 3?  | a + b или 1 + 2  |
 
+
 _________
 
 ## Обязательная задача 2
 Мы устроились на работу в компанию, где раньше уже был DevOps Engineer. Он написал скрипт, позволяющий узнать, 
 какие файлы модифицированы в репозитории, относительно локальных изменений. Этим скриптом недовольно начальство, 
 потому что в его выводе есть не все изменённые файлы, а также непонятен полный путь к директории, где они находятся. 
-Как можно доработать скрипт ниже, чтобы исполнял требования вашего руководителя?
+Как можно доработать скрипт ниже, чтобы он исполнял требования вашего руководителя?
 
 ```python
 #!/usr/bin/env python3
@@ -48,24 +49,29 @@ for result in result_os.split('\n'):
 #!/usr/bin/env python3
 
 import os
+import pathlib
 
+path = pathlib.PureWindowsPath()
+print(path)
 cmd=os.getcwd()
 bash_command = ["cd "+cmd, "git status"]
 result_os = os.popen(' && '.join(bash_command)).read()
-is_change = False
+#is_change = False
 for result in result_os.split('\n'):
     if result.find('modified') != -1:
         prepare_result = result.replace('\tmodified:   ', ' ')
         print(cmd+prepare_result)       
-        break
+        #break
 ```
+Доработка - была убрана лешняя переменная и команда break.
 
 ### Вывод скрипта при запуске при тестировании:
 ```
+E:\DEV_OPS\devops-netology\devops-netology\devopsnetology 1.py
 E:\DEV_OPS\devops-netology\devops-netology\devopsnetology README.md
 ```
 
-
+[link_4_2_count.jpg](./4_2_count.jpg)
 
 ## Обязательная задача 3
 Доработать скрипт выше так, чтобы он мог проверять не только локальный репозиторий в текущей директории, 
