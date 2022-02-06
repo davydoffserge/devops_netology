@@ -54,7 +54,7 @@ The unseal key and root token are displayed below in case you want to
 seal/unseal the Vault or re-authenticate.
 
 Unseal Key: p+RmXTZn9TU3iCH4+ZbFqrrOqI7U8kvwjPV6LWgWsJc=
-Root Token: s.NPey6lQGHdelTiYMtAJAAxyI
+Root Token: s.LSgJDncKx732IqJZ7zhwRXtC
 
 Development mode should NOT be used in production installations!
 ```
@@ -321,18 +321,23 @@ server {
 ## 9.Создайте скрипт, который будет генерировать новый сертификат в vault:генерируем новый сертификат так, чтобы не переписывать конфиг nginx; перезапускаем nginx для применения нового сертификата.
 
 ```bash
-serge@ubu3:~$ sudo nano serts.sh
-
-#!/bin/bash
-vault write -format=json pki_int/issue/example-dot-com common_name="serge.example.com" ttl=720h > /home/serge/serge.example.com.crt
+#!/usr/bin/env bash
+set -xe
+export VAULT_ADDR=http://127.0.0.1:8200
+export VAULT_TOKEN=s.LSgJDncKx732IqJZ7zhwRXtC
+vault write -format=json pki_int/issue/example-dot-com common_name="serge.example.com" ttl=720h > /home/serge/>
 cat /home/serge/serge.example.com.crt | jq -r .data.certificate > /home/serge/serge.example.com.crt.pem
 cat /home/serge/serge.example.com.crt | jq -r .data.issuing_ca >> /home/serge/serge.example.com.crt.pem
 cat /home/serge/serge.example.com.crt | jq -r .data.private_key > /home/serge/serge.example.com.crt.key
-sudo systemctl reload nginx
+systemctl reload nginx
 ```
 ```bash
-serge@ubu3:~$ sudo chmod ugo+x serts.sh
+serge@ubu4:~$ sudo chmod ugo+x serts.sh
 ```
+
+[linl_serts_92.jpg](./serts_92.jpg)
+
+[link_serts_93.jpg](./serts_93.jpg)
 
 ## 10.Поместите скрипт в crontab, чтобы сертификат обновлялся какого-то числа каждого месяца в удобное для вас время.
 
@@ -342,6 +347,6 @@ serge@ubu3:~$ crontab -l
 
 ```bash
 # m h  dom mon dow   command
-0 0 1 * * /bin/sh /home/serge/serts.sh
+0 0 1 * * root /bin/sh /home/serge/serts.sh
 ```
 
