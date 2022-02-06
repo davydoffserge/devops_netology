@@ -335,7 +335,7 @@ systemctl reload nginx
 serge@ubu4:~$ sudo chmod ugo+x serts.sh
 ```
 
-[linl_serts_92.jpg](./serts_92.jpg)
+[link_serts_92.jpg](./serts_92.jpg)
 
 [link_serts_93.jpg](./serts_93.jpg)
 
