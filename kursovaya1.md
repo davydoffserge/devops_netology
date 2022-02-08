@@ -350,3 +350,6 @@ serge@ubu3:~$ crontab -l
 0 0 1 * * root /bin/sh /home/serge/serts.sh
 ```
 
+[link_1234.jpg](./1234.jpg)
+
+[link_1234_3.jpg](./1234_3.jpg)
