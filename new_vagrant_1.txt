@@ -1,0 +1,107 @@
+#1. Опишите своими словами основные преимущества применения на практике IaaC паттернов. Какой из принципов IaaC является основополагающим?
+
+Ответ:
+Преимущества применения на практике IaaC паттернов:
+- тратится меньше времени, используя готовые решения
+- меньше просчетов, используя типовые решения
+- более быстрая разработка и эффективная разработка, соответственно экономия денег.
+Основополагающим принципом IaaC является идемпотентность (свойство определенных операций, которые могут быть выполнены многократно, не изменяя результат первоначального применения).
+
+
+#2. Чем Ansible выгодно отличается от других систем управление конфигурациями? Какой, на ваш взгляд, метод работы систем конфигурации более надёжный push или pull?
+
+Ответ
+Преимущества Ansible:
+* на управляемые узлы не нужно устанавливать никакого дополнительного программного оборудования, всё работает через SSH (в случае необходимости дополнительные модули можно взять из официального репозитория);
+*  код программы, написанный на Python, очень прост;
+*  возможность написания дополнительных модулей;
+* прост в изучении;
+* работает не только в режиме push(“из коробки”), но и pull.
+Pull-подход защищеннее, поскольку учетные данные кластера недоступны за его пределами.На мой взгляд, следует использовать то, что больше подходит к конкретному случаю или комбинировать.
+Если кто-то проникнет в репозиторий Git и сможет push'ить туда код, то он сможет развернуть все, что пожелает (независимо от выбранного подхода, будет это pull или push), и внедриться в системы кластера.
+Таким образом, наиболее важными компонентами, требующими защиты, являются Git-репозиторий и CI/CD-системы, а не учетные данные кластера.
+
+Проблема с системами на основе push заключается в том, что у вас должна быть полная модель всей архитектуры на центральном push-узле. Вы не можете толкнуть машину, о которой не знаете.
+Очевидно, что все может работать, но требуется много работы, чтобы синхронизировать это.
+Существует также вопрос организационной политики. Система, основанная на push, передает все управление центральным администраторам. Таким способом очень сложно управлять полностью. 
+Я думаю, что проблема масштабирования - главный вопрос, любой подход масштабируется, если вы просто посмотрите на количество клиентов. Во многих отношениях push легче масштабировать.
+Однако динамическая конфигурация более или менее подразумевает, что у вас есть хотя бы версия для регистрации клиента по запросу.
+В конечном счете, речь идет о том, какая система соответствует рабочему процессу и владельцу в вашей организации. Как правило, pull системы более гибкие.
+
+
+#3. Установить на личный компьютер: VirtualBox, Vagrant, Ansible,  Приложить вывод команд установленных версий каждой из программ, оформленный в markdown.
+ 
+для установки Vagrant воспользуемся одним из предыдущих домашниз заданий, 
+
+User@DESKTOP-ERT9PAB MINGW64 ~/test
+$ vagrant init bento/ubuntu-20.04
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+
+User@DESKTOP-ERT9PAB MINGW64 ~/test
+$ vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'bento/ubuntu-20.04'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'bento/ubuntu-20.04' version '202112.19.0' is up to date...
+==> default: Setting the name of the VM: test_default_1644327888287_59894
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Connection reset. Retrying...
+    default: Warning: Connection aborted. Retrying...
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+==> default: Mounting shared folders...
+    default: /vagrant => C:/Users/User/test
+
+User@DESKTOP-ERT9PAB MINGW64 ~/test
+$ vagrant -v
+Vagrant 2.2.19
+
+вводим vagrant ssh  и подключаемся к убунту по ssh. Выходим выполнив команду exit.
+
+модифицируем Vagrantfile на основании полученного от нашего лектора...
+
+снова запускаем виртуальную машину. Получили ошибку связанную с ненайденным файлом 
+C:/Users/User/ansible/provision.yml
+
+выполнив sudo apt update 
+
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install ansible -y
+
+проверим что мы получили в итоге 
+
+vagrant@server1:~$ ansible --version
+ansible [core 2.12.2]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/vagrant/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/vagrant/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.8.10 (default, Nov 26 2021, 20:14:08) [GCC 9.3.0]
+  jinja version = 2.10.1
+  libyaml = True
+vagrant@server1:~$
+
+
