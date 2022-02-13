@@ -168,6 +168,10 @@ serge@ubu2:~/myproject$
 ```
 [link_docker_push.jpg](./docker_push.jpg)
 
+ссылка на на https://hub.docker.com
+
+https://hub.docker.com/repository/docker/davydoffserge/davydoffserge
+
 ## Задача 2. Посмотрите на сценарий ниже и ответьте на вопрос: "Подходит ли в этом сценарии использование Docker контейнеров или лучше подойдет виртуальная машина, физическая машина? Может быть возможны разные варианты?"
 
 ## Детально опишите и обоснуйте свой выбор.
