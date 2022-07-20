@@ -17,3 +17,6 @@ override.tf.json
 
 .terraformrc
 terraform.rc
+
+serge_bucket.conf
+.terraform.lock.hcl
