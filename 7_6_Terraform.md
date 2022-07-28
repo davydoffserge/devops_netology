@@ -40,6 +40,8 @@ https://github.com/hashicorp/terraform-provider-aws/blob/8e4d8a3f3f781b83f96217c
 
 ![](./7_6_conflict.jpg)
 
+Длина имени не более 80 символов.
+
 https://github.com/hashicorp/terraform-provider-aws/blob/8e4d8a3f3f781b83f96217c2275f541c893fec5a/aws/validators.go#L1038
 
 ![](./7_6_len80.jpg)
