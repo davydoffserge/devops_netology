@@ -1,0 +1,6 @@
+---
+- hosts: db01 db02
+  become:
+    true
+  roles:
+      - mysql

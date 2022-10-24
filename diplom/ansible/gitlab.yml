@@ -1,0 +1,17 @@
+- hosts: gitlab
+  become:
+    true
+  roles:
+   - gitlab
+
+- hosts: runner
+  become:
+    true
+  roles:
+      - runner
+
+- hosts: all
+  become:
+    true
+  roles:
+      - nodeexporter

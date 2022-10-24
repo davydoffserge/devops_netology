@@ -1,0 +1,48 @@
+---
+# tasks file for runner
+
+- name: Install git
+  package:
+    name: "git"
+    state: present
+    update_cache: yes
+
+- name: Download the binary for your system
+  command: "curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64"
+
+- name: Give it permission to execute
+  command: "chmod +x /usr/local/bin/gitlab-runner"
+
+- name: Install GitLab Runner
+  command: "useradd --comment 'GitLab Runner' --create-home runner --shell /bin/bash"
+
+- name: Install and run as a service
+  command: "gitlab-runner install --user=runner --working-directory=/home/runner"
+
+- name: Start runner
+  command: "gitlab-runner start"
+
+- name: Register runner
+  shell: gitlab-runner register \
+    --non-interactive \
+    --url "http://gitlab.{{ domain }}/" \
+    --registration-token "{{ gitlab_runner_token }}" \
+    --description "codechecker" \
+    --executor "shell"
+
+- name: Create directory for runner ssh keys
+  file:
+    name: /home/runner/.ssh/
+    state: directory
+
+- name: Copy id_rsa files
+  template:
+    src: templates/{{ item }}
+    dest: /home/runner/.ssh/
+  with_items:
+    - id_rsa.pub
+    - id_rsa
+
+- name: move .bash_logout
+  shell: >
+    rm /home/runner/.bash_logout
