@@ -68,7 +68,13 @@
 
 ![](./kartinki2/alertmanager1.jpg)
 
+При работе ```pepeline``` по коммиту была ошибка
 
+![](./kartinki2/gitlab_vars.png)
+
+![](./kartinki2/gitlab_script.jpg)
+
+![](./kartinki2/appppp12.png)
 
 
 
