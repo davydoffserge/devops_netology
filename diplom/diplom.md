@@ -68,13 +68,12 @@
 
 ![](./kartinki2/alertmanager1.jpg)
 
-При работе ```pepeline``` по коммиту была ошибка
 
-![](./kartinki2/gitlab_vars.png)
+![](./kartinki2/varssss.png)
 
-![](./kartinki2/gitlab_script.jpg)
+![](./kartinki2/kod.png)
 
-![](./kartinki2/appppp12.png)
+![](./kartinki2/theend.png)
 
-
-
+Р.S.: Задание Дипломного Проекта оказалось интересным, не скажу,что что все давалось легко, можно сказать что даже сложно.
+Но благодаря трудностям мы учимся и постигаем новое. Спасибо Вам Большое! 
