@@ -48,7 +48,7 @@
 
 Устанвлен ```WordPress```.
 
-![](./kartinki2/wwwdavydoffsergeru.png)
+![](./kartinki2/wwwdavydoffsergeru.jpg)
 
 Установлены ```Gitlab CE``` и ```Gitlab Runner```
 
@@ -56,13 +56,13 @@
 
 Установлены: ```Prometheus,  Node Exporter```.
 
-![](./kartinki2/prometheus_up.png)
+![](./kartinki2/prometheus_up.jpg)
 
 Установлена: ```Grafana```
 
-![](./kartinki2/grafana_app.png)
+![](./kartinki2/grafana_app.jpg)
 
-![](./kartinki2/grafana_all2.png)
+![](./kartinki2/grafana_all2.jpg)
 
 Установлен: ```Alert Manager```
 
@@ -73,7 +73,7 @@
 
 ![](./kartinki2/kod.png)
 
-![](./kartinki2/theend.png)
+![](./kartinki2/theend.jpg)
 
 Р.S.: Задание Дипломного Проекта оказалось интересным, не скажу,что что все давалось легко, можно сказать что даже сложно.
 Но благодаря трудностям мы учимся и постигаем новое. Спасибо Вам Большое! 
